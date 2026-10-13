@@ -293,3 +293,6 @@ h2{font-size:clamp(2rem,4.6vw,3.4rem)}
 .field-err{font-size:.86rem;color:#a12f2f;background:rgba(192,57,43,.08);border-radius:10px;padding:10px 14px}
 .field-err[hidden]{display:none}
 @media (max-width:860px){.checker .in{padding:24px}.checker .out{padding:24px}}
+
+/* v3.1: título da capa em tamanho intermediário */
+h1{font-size:clamp(2.2rem,5.2vw,4rem)}
