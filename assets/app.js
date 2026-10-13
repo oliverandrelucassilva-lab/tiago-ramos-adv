@@ -119,13 +119,22 @@
   var MES = 30.4375;
   var NC = 'Não calculado';
 
-  var now = new Date();
-  $('dtHoje').value = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+  function ymd(d) { return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear(); }
 
+  /* Datas: texto dd/mm/aaaa com máscara; retorna Date UTC, null (incompleta) ou false (inválida) */
   function parseDate(v) {
-    if (!v) return null;
-    var p = v.split('-').map(Number);
-    return new Date(Date.UTC(p[0], p[1] - 1, p[2]));
+    var m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(v || '');
+    if (!m) return null;
+    var d = +m[1], mo = +m[2], y = +m[3];
+    var dt = new Date(Date.UTC(y, mo - 1, d));
+    if (y < 1990 || y > 2100 || dt.getUTCMonth() !== mo - 1 || dt.getUTCDate() !== d) return false;
+    return dt;
+  }
+  function maskDate(el) {
+    var dg = el.value.replace(/\D/g, '').slice(0, 8), o = dg;
+    if (dg.length > 4) o = dg.slice(0, 2) + '/' + dg.slice(2, 4) + '/' + dg.slice(4);
+    else if (dg.length > 2) o = dg.slice(0, 2) + '/' + dg.slice(2);
+    el.value = o;
   }
   function fmtDate(d) { return pad(d.getUTCDate()) + '/' + pad(d.getUTCMonth() + 1) + '/' + d.getUTCFullYear(); }
   function brl(n) { return n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
@@ -135,11 +144,34 @@
     return isFinite(n) ? n : 0;
   }
 
+  /* Dinheiro: separa milhares enquanto digita e mantém o cursor */
+  function maskMoney(el) {
+    var pos = el.selectionStart, before = el.value.slice(0, pos).replace(/[^\d,]/g, '').length;
+    var raw = el.value.replace(/[^\d,]/g, ''), i = raw.indexOf(',');
+    var ent = (i === -1 ? raw : raw.slice(0, i)).replace(/^0+(?=\d)/, '');
+    var dec = i === -1 ? null : raw.slice(i + 1).replace(/,/g, '').slice(0, 2);
+    var out = ent.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (dec === null ? '' : ',' + dec);
+    el.value = out;
+    var n = 0, p = 0;
+    while (p < out.length && n < before) { if (/[\d,]/.test(out[p])) n++; p++; }
+    try { el.setSelectionRange(p, p); } catch (e) {}
+  }
+
+  var errEl = $('dtErro');
   function calc() {
-    var c = parseDate($('dtContrato').value);
-    var r = parseDate($('dtHoje').value);
+    var cv = $('dtContrato').value, rv = $('dtHoje').value;
+    var c = parseDate(cv), r = parseDate(rv);
     var st = $('status');
     var out = ['rLimite', 'rDiasContrato', 'rDiasTol', 'rIndeniz'];
+    var bad = [];
+    if (c === false) bad.push('data de entrega');
+    if (r === false) bad.push('data de referência');
+    ['dtContrato', 'dtHoje'].forEach(function (id) {
+      var v = parseDate($(id).value);
+      if (v === false) $(id).setAttribute('aria-invalid', 'true'); else $(id).removeAttribute('aria-invalid');
+    });
+    errEl.hidden = !bad.length;
+    errEl.textContent = bad.length ? 'Confira a ' + bad.join(' e a ') + ': use o formato dia/mês/ano, por exemplo 30/11/2025.' : '';
     if (!c || !r) {
       st.className = 'badge warn';
       st.textContent = !c ? 'Informe a data de entrega prevista' : 'Informe a data de referência';
@@ -160,7 +192,39 @@
     else if (dT <= 0) { st.className = 'badge warn'; st.textContent = 'No período de tolerância (' + (-dT) + ' dias restantes)'; }
     else { st.className = 'badge bad'; st.textContent = 'Atraso além da tolerância legal'; }
   }
-  ['dtContrato', 'dtHoje', 'valorPago'].forEach(function (id) { $(id).addEventListener('input', calc); });
+
+  ['dtContrato', 'dtHoje'].forEach(function (id) {
+    $(id).addEventListener('input', function () { maskDate(this); calc(); });
+  });
+  $('valorPago').addEventListener('input', function () { maskMoney(this); calc(); });
+  $('valorPago').addEventListener('blur', function () {
+    if (/^\d+,\d$/.test(this.value)) this.value += '0';
+    else if (/^\d+$/.test(this.value.replace(/\./g, '')) && this.value) this.value += ',00';
+    calc();
+  });
+
+  /* Calendário opcional (seletor nativo), preenchendo o campo de texto */
+  Array.prototype.forEach.call(document.querySelectorAll('.cal'), function (btn) {
+    var dp = btn.parentNode.querySelector('.dp'), txt = $(btn.getAttribute('data-for'));
+    btn.addEventListener('click', function () {
+      var d = parseDate(txt.value);
+      dp.value = d ? d.toISOString().slice(0, 10) : '';
+      try { dp.showPicker(); } catch (e) { dp.focus(); dp.click(); }
+    });
+    dp.addEventListener('change', function () {
+      if (!dp.value) return;
+      var p = dp.value.split('-');
+      txt.value = p[2] + '/' + p[1] + '/' + p[0];
+      calc();
+    });
+  });
+
+  $('usarHoje').addEventListener('click', function () { $('dtHoje').value = ymd(new Date()); calc(); });
+  $('limpar').addEventListener('click', function () {
+    $('dtContrato').value = ''; $('valorPago').value = '';
+    $('dtHoje').value = ymd(new Date()); calc(); $('dtContrato').focus();
+  });
+  $('dtHoje').value = ymd(new Date());
   $('chk').addEventListener('submit', function (e) { e.preventDefault(); });
   calc();
 

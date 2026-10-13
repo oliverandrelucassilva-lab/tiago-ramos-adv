@@ -79,6 +79,7 @@
   <symbol id="i-previdenciario" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.500 3.200 7.700 8 9 4.800-1.300 8-4.500 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
   <symbol id="i-administrativo" viewBox="0 0 24 24"><path d="M3 9 12 4l9 5H3ZM5 9v9M9.500 9v9M14.500 9v9M19 9v9M3 21h18"/></symbol>
   <symbol id="i-raio" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></symbol>
+  <symbol id="i-calendario" viewBox="0 0 24 24"><rect x="3.500" y="5" width="17" height="15" rx="2"/><path d="M3.500 10h17M8 3v4M16 3v4"/></symbol>
   <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
 </svg>
 
@@ -209,15 +210,29 @@
       <div class="checker" aria-labelledby="chk-title">
         <form class="in" id="chk" novalidate>
           <h3 id="chk-title">Calculadora informativa de prazo</h3>
-          <label for="dtContrato">Data de entrega prevista no contrato
-            <input type="date" id="dtContrato" required>
-          </label>
-          <label for="dtHoje">Data de referência <span class="hint">hoje, ou a data em que as chaves foram entregues</span>
-            <input type="date" id="dtHoje">
-          </label>
-          <label for="valorPago">Valor já pago à construtora (R$) <span class="hint">opcional, sem contar o financiamento bancário ainda não repassado</span>
-            <input type="text" id="valorPago" inputmode="decimal" placeholder="Ex.: 120.000,00" autocomplete="off">
-          </label>
+          <div class="fld">
+            <label for="dtContrato">Data de entrega prevista no contrato</label>
+            <div class="dfield">
+              <input type="text" id="dtContrato" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" autocomplete="off" aria-describedby="dtErro">
+              <button type="button" class="cal" data-for="dtContrato" aria-label="Escolher a data no calendário"><svg class="ico"><use href="#i-calendario"/></svg></button>
+              <input type="date" class="dp" tabindex="-1" aria-hidden="true">
+            </div>
+          </div>
+          <div class="fld">
+            <label for="dtHoje">Data de referência <span class="hint">hoje, ou a data em que as chaves foram entregues</span></label>
+            <div class="dfield">
+              <input type="text" id="dtHoje" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" autocomplete="off" aria-describedby="dtErro">
+              <button type="button" class="cal" data-for="dtHoje" aria-label="Escolher a data no calendário"><svg class="ico"><use href="#i-calendario"/></svg></button>
+              <input type="date" class="dp" tabindex="-1" aria-hidden="true">
+            </div>
+            <button type="button" class="linkbtn" id="usarHoje">Usar a data de hoje</button>
+          </div>
+          <div class="fld">
+            <label for="valorPago">Valor já pago à construtora <span class="hint">opcional, sem contar o financiamento bancário ainda não repassado</span></label>
+            <div class="mfield"><span aria-hidden="true">R$</span><input type="text" id="valorPago" inputmode="decimal" placeholder="120.000,00" autocomplete="off"></div>
+          </div>
+          <p class="field-err" id="dtErro" role="alert" hidden></p>
+          <button type="button" class="linkbtn" id="limpar">Limpar campos</button>
         </form>
         <div class="out" aria-live="polite">
           <div class="track" aria-hidden="true">
