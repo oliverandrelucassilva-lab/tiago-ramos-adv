@@ -26,7 +26,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Libre+Caslon+Text:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/assets/style.css">
 <script>document.documentElement.className="js"</script>
 
@@ -78,9 +78,11 @@
   <symbol id="i-familia" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M2.5 20c0-3.3 2.5-6 5.5-6s5.5 2.700 5.500 6M15 14.200c.6-.2 1.200-.3 2-.2 2.300.2 4 2.200 4 5"/></symbol>
   <symbol id="i-previdenciario" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.500 3.200 7.700 8 9 4.800-1.300 8-4.500 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
   <symbol id="i-administrativo" viewBox="0 0 24 24"><path d="M3 9 12 4l9 5H3ZM5 9v9M9.500 9v9M14.500 9v9M19 9v9M3 21h18"/></symbol>
+  <symbol id="i-raio" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></symbol>
   <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
 </svg>
 
+<div class="progress" id="progress" aria-hidden="true"></div>
 <a class="skip" href="#conteudo">Ir para o conteúdo</a>
 
 <header class="top">
@@ -100,7 +102,7 @@
   <div class="wrap hero-in">
     <div class="hero-text">
       <p class="eyebrow">Advocacia para pessoas e empresas</p>
-      <h1>Advocacia na Bahia, em São Paulo, em Sergipe e em outros estados</h1>
+      <h1>Advocacia na Bahia, em São Paulo, em Sergipe e <em>em outros estados</em></h1>
       <p class="lead">Atuação em direito do consumidor, imobiliário, civil, trabalhista, família, previdenciário e administrativo. Os processos são acompanhados de ponta a ponta pelo próprio advogado, também por meio eletrônico.</p>
       <div class="entry">
         <a class="entry-card" href="#imovel-atrasado">
@@ -138,7 +140,7 @@
   Nenhum JavaScript precisa ser alterado. A ordem das abas é a ordem deste menu.
 -->
 <nav class="tabs" aria-label="Seções do site">
-  <div class="wrap tabs-in">
+  <div class="tabs-in">
     <span class="tab-ind" aria-hidden="true"></span>
     <a href="#imovel-atrasado">Imóvel atrasado</a>
     <a href="#isencao-ir">Isenção de IR</a>
@@ -151,11 +153,11 @@
 <main id="conteudo">
 
   <!-- ABA: IMÓVEL ATRASADO -->
-  <section class="panel is-active" id="imovel-atrasado" aria-labelledby="t-imovel">
+  <section class="panel is-active" data-num="01" id="imovel-atrasado" aria-labelledby="t-imovel">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">Direito imobiliário · Imóvel na planta</p>
-        <h2 id="t-imovel" tabindex="-1">Imóvel na planta com atraso: a construtora não entregou no prazo?</h2>
+        <p class="chip-row"><span class="chip"><b>01</b> / Imóvel</span><span class="chip-sub">Direito imobiliário · Imóvel na planta</span></p>
+        <h2 id="t-imovel" tabindex="-1">Imóvel na planta com atraso: a construtora <em>não entregou no prazo?</em></h2>
         <p>A lei permite à construtora uma tolerância de até 180 dias além da data prevista no contrato (Lei 4.591/64, art. 43-A). Passado esse período, o comprador pode exercer direitos previstos em lei, inclusive antes da entrega das chaves. Há duas opções.</p>
       </div>
 
@@ -257,11 +259,11 @@
   </section>
 
   <!-- ABA: ISENÇÃO DE IR -->
-  <section class="panel" id="isencao-ir" aria-labelledby="t-ir">
+  <section class="panel" data-num="02" id="isencao-ir" aria-labelledby="t-ir">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">Direito tributário · Lei 7.713/1988, art. 6º, XIV</p>
-        <h2 id="t-ir" tabindex="-1">Doença grave pode dar isenção de Imposto de Renda</h2>
+        <p class="chip-row"><span class="chip"><b>02</b> / Isenção de IR</span><span class="chip-sub">Lei 7.713/1988, art. 6º, XIV</span></p>
+        <h2 id="t-ir" tabindex="-1">Doença grave pode dar <em>isenção de Imposto de Renda</em></h2>
         <p>Aposentados, pensionistas e militares da reserva ou reforma com doença prevista em lei podem ter isenção de IR sobre esses rendimentos e pedir a restituição do imposto já descontado.</p>
       </div>
 
@@ -273,7 +275,7 @@
             <li><span class="roman">II</span><span><b>Pensionistas</b></span></li>
             <li><span class="roman">III</span><span><b>Militares</b> da reserva ou reforma</span></li>
           </ul>
-          <p class="callout">A isenção vale somente sobre aposentadoria, pensão ou reserva e reforma, incluindo o 13º. A doença pode ter sido diagnosticada antes ou depois da aposentadoria.</p>
+          <p class="callout"><svg class="ico"><use href="#i-raio"/></svg><span>A isenção vale somente sobre aposentadoria, pensão ou reserva e reforma, incluindo o 13º. A doença pode ter sido diagnosticada antes ou depois da aposentadoria.</span></p>
         </div>
         <div>
           <h3 class="sub">As 17 doenças previstas em lei</h3>
@@ -345,11 +347,11 @@
   </section>
 
   <!-- ABA: ÁREAS DE ATUAÇÃO -->
-  <section class="panel" id="areas-de-atuacao" aria-labelledby="t-areas">
+  <section class="panel" data-num="03" id="areas-de-atuacao" aria-labelledby="t-areas">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">Áreas de atuação</p>
-        <h2 id="t-areas" tabindex="-1">Atendimento a pessoas e empresas em várias áreas do direito</h2>
+        <p class="chip-row"><span class="chip"><b>03</b> / Áreas</span><span class="chip-sub">Para pessoas e empresas</span></p>
+        <h2 id="t-areas" tabindex="-1">Atendimento a pessoas e empresas em <em>várias áreas do direito</em></h2>
       </div>
       <div class="areas">
         <article><svg class="ai" aria-hidden="true"><use href="#i-consumidor"/></svg><h3>Direito do Consumidor</h3><p>Questões decorrentes de relações de consumo, como contratos, cobranças e prestação de serviços.</p></article>
@@ -370,11 +372,11 @@
   </section>
 
   <!-- ABA: ONDE ATUAMOS -->
-  <section class="panel" id="onde-atuamos" aria-labelledby="t-onde">
+  <section class="panel" data-num="04" id="onde-atuamos" aria-labelledby="t-onde">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">Onde atuamos</p>
-        <h2 id="t-onde" tabindex="-1">Bahia, São Paulo, Sergipe e outros estados</h2>
+        <p class="chip-row"><span class="chip"><b>04</b> / Atuação</span><span class="chip-sub">Onde atuamos</span></p>
+        <h2 id="t-onde" tabindex="-1">Bahia, São Paulo, Sergipe <em>e outros estados</em></h2>
         <p>O escritório atua na Bahia, em São Paulo e em Sergipe. Nos demais estados, o atendimento e o acompanhamento são feitos por meio eletrônico, nos tribunais em que o advogado tem inscrição ou atua.</p>
       </div>
       <div class="grid3">
@@ -392,11 +394,11 @@
   </section>
 
   <!-- ABA: CONTATO -->
-  <section class="panel" id="contato" aria-labelledby="t-contato">
+  <section class="panel" data-num="05" id="contato" aria-labelledby="t-contato">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">Contato</p>
-        <h2 id="t-contato" tabindex="-1">Fale com o escritório</h2>
+        <p class="chip-row"><span class="chip"><b>05</b> / Contato</span><span class="chip-sub">Atendimento</span></p>
+        <h2 id="t-contato" tabindex="-1">Fale com o <em>escritório</em></h2>
         <p>Envie um e-mail com um resumo do assunto. O retorno é feito pelo próprio advogado.</p>
       </div>
       <div class="contact-grid">

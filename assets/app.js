@@ -13,7 +13,8 @@
     var a = document.querySelector('.tabs a[aria-current="true"]');
     if (!a || !ind) return;
     ind.style.width = a.offsetWidth + 'px';
-    ind.style.transform = 'translateX(' + a.offsetLeft + 'px)';
+    ind.style.height = a.offsetHeight + 'px';
+    ind.style.transform = 'translate(' + a.offsetLeft + 'px,' + a.offsetTop + 'px)';
   }
   window.addEventListener('resize', moveInd);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInd);
@@ -63,6 +64,24 @@
 
   window.addEventListener('hashchange', fromHash);
   fromHash();
+
+  /* Barra de progresso de leitura */
+  var prog = $('progress');
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - innerHeight;
+    prog.style.width = (h > 0 ? Math.min(100, scrollY / h * 100) : 0) + '%';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* Brilho que acompanha o mouse nos cartões */
+  document.addEventListener('pointermove', function (e) {
+    var c = e.target.closest && e.target.closest('.card,.areas article,.entry-card');
+    if (!c) return;
+    var r = c.getBoundingClientRect();
+    c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }, { passive: true });
 
   /* Contadores da faixa de parâmetros legais */
   Array.prototype.forEach.call(document.querySelectorAll('.count'), function (el) {
