@@ -100,13 +100,8 @@
     });
   }
 
-  /* ---------- Canais opcionais (config.js) ---------- */
-  var extra = $('canaisExtra'), list = $('contactList');
-  if (cfg.whatsapp && /^\d{10,15}$/.test(cfg.whatsapp) && extra) {
-    var w = document.createElement('a'); w.className = 'btn ghost'; w.target = '_blank'; w.rel = 'noopener';
-    w.href = 'https://wa.me/' + cfg.whatsapp; w.textContent = 'Abrir WhatsApp';
-    w.addEventListener('click', function () { track('whatsapp'); }); extra.appendChild(w);
-  }
+  /* ---------- Instagram opcional (config.js) ---------- */
+  var list = $('contactList');
   if (cfg.instagram && /^[\w.]{1,30}$/.test(cfg.instagram) && list) {
     var di = document.createElement('div');
     di.innerHTML = '<dt>Instagram</dt><dd><a target="_blank" rel="noopener"></a></dd>';

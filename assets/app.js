@@ -205,20 +205,88 @@
     calc();
   });
 
-  /* Calendário opcional (seletor nativo), preenchendo o campo de texto */
+  /* Calendário próprio (abre pelo botão dentro do campo de data) */
+  var MESES = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+  var pop = document.createElement('div');
+  pop.className = 'cal-pop'; pop.hidden = true;
+  pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-label', 'Escolher data');
+  pop.innerHTML =
+    '<div class="cp-head">' +
+    '<button type="button" class="cp-nav" data-n="-12" aria-label="Ano anterior">&laquo;</button>' +
+    '<button type="button" class="cp-nav" data-n="-1" aria-label="Mês anterior">&lsaquo;</button>' +
+    '<div class="cp-title" aria-live="polite"></div>' +
+    '<button type="button" class="cp-nav" data-n="1" aria-label="Próximo mês">&rsaquo;</button>' +
+    '<button type="button" class="cp-nav" data-n="12" aria-label="Próximo ano">&raquo;</button></div>' +
+    '<div class="cp-week" aria-hidden="true"><span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span></div>' +
+    '<div class="cp-days" role="grid"></div>' +
+    '<div class="cp-foot"><button type="button" class="cp-link" data-a="hoje">Hoje</button><button type="button" class="cp-link" data-a="limpar">Limpar</button></div>';
+  var cpDays = pop.querySelector('.cp-days'), cpTitle = pop.querySelector('.cp-title');
+  var cpTarget = null, cpBtn = null, cpView = null, cpFocus = null;
+
+  function iso(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function cpRender() {
+    var y = cpView.getFullYear(), m = cpView.getMonth(), first = new Date(y, m, 1), start = new Date(y, m, 1 - first.getDay());
+    var today = iso(new Date()), cur = parseDate(cpTarget.value), selIso = cur ? cur.toISOString().slice(0, 10) : '', html = '';
+    cpTitle.textContent = MESES[m] + ' ' + y;
+    for (var i = 0; i < 42; i++) {
+      var d = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i), k = iso(d);
+      var cls = 'cp-day' + (d.getMonth() !== m ? ' cp-out' : '') + (k === today ? ' today' : '') + (k === selIso ? ' sel' : '');
+      html += '<button type="button" class="' + cls + '" data-d="' + k + '" tabindex="' + (k === cpFocus ? 0 : -1) + '" aria-label="' +
+        d.getDate() + ' de ' + MESES[d.getMonth()].toLowerCase() + ' de ' + d.getFullYear() + '"' + (k === selIso ? ' aria-pressed="true"' : '') + '>' + d.getDate() + '</button>';
+    }
+    cpDays.innerHTML = html;
+  }
+  function cpGo(date, focus) {
+    var min = new Date(1990, 0, 1), max = new Date(2100, 11, 31);
+    if (date < min) date = min; if (date > max) date = max;
+    cpFocus = iso(date); cpView = new Date(date.getFullYear(), date.getMonth(), 1); cpRender();
+    if (focus) { var b = cpDays.querySelector('[data-d="' + cpFocus + '"]'); if (b) b.focus(); }
+  }
+  function cpOpen(btn) {
+    var box = btn.parentNode;
+    cpBtn = btn; cpTarget = $(btn.getAttribute('data-for'));
+    var cur = parseDate(cpTarget.value), base = cur ? new Date(cur.getUTCFullYear(), cur.getUTCMonth(), cur.getUTCDate()) : new Date();
+    box.appendChild(pop); pop.hidden = false;
+    var r = box.getBoundingClientRect();
+    pop.classList.toggle('up', innerHeight - r.bottom < 400 && r.top > innerHeight - r.bottom);
+    cpGo(base, true);
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('cal-open');
+  }
+  function cpClose(back) {
+    if (pop.hidden) return;
+    pop.hidden = true;
+    document.body.classList.remove('cal-open');
+    if (cpBtn) { cpBtn.setAttribute('aria-expanded', 'false'); if (back) cpBtn.focus(); }
+  }
+  function cpPick(date) {
+    cpTarget.value = pad(date.getDate()) + '/' + pad(date.getMonth() + 1) + '/' + date.getFullYear();
+    cpTarget.dispatchEvent(new Event('input'));
+    cpClose(true);
+  }
   Array.prototype.forEach.call(document.querySelectorAll('.cal'), function (btn) {
-    var dp = btn.parentNode.querySelector('.dp'), txt = $(btn.getAttribute('data-for'));
-    btn.addEventListener('click', function () {
-      var d = parseDate(txt.value);
-      dp.value = d ? d.toISOString().slice(0, 10) : '';
-      try { dp.showPicker(); } catch (e) { dp.focus(); dp.click(); }
-    });
-    dp.addEventListener('change', function () {
-      if (!dp.value) return;
-      var p = dp.value.split('-');
-      txt.value = p[2] + '/' + p[1] + '/' + p[0];
-      calc();
-    });
+    btn.setAttribute('aria-haspopup', 'dialog'); btn.setAttribute('aria-expanded', 'false');
+    btn.addEventListener('click', function () { if (!pop.hidden && cpBtn === btn) cpClose(false); else cpOpen(btn); });
+  });
+  pop.addEventListener('click', function (e) {
+    var n = e.target.closest('[data-n]'), a = e.target.closest('[data-a]'), d = e.target.closest('[data-d]');
+    if (n) { var v = new Date(cpView.getFullYear(), cpView.getMonth() + (+n.getAttribute('data-n')), 1); cpGo(v, false); n.focus(); }
+    else if (d) { var p = d.getAttribute('data-d').split('-'); cpPick(new Date(+p[0], p[1] - 1, +p[2])); }
+    else if (a) {
+      if (a.getAttribute('data-a') === 'hoje') cpPick(new Date());
+      else { cpTarget.value = ''; cpTarget.dispatchEvent(new Event('input')); cpClose(true); }
+    }
+  });
+  pop.addEventListener('keydown', function (e) {
+    var d = e.target.closest && e.target.closest('[data-d]');
+    if (e.key === 'Escape') { e.preventDefault(); cpClose(true); return; }
+    if (!d) return;
+    var p = d.getAttribute('data-d').split('-'), cur = new Date(+p[0], p[1] - 1, +p[2]), step = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[e.key];
+    if (step) { e.preventDefault(); cpGo(new Date(cur.getFullYear(), cur.getMonth(), cur.getDate() + step), true); }
+    else if (e.key === 'PageUp' || e.key === 'PageDown') { e.preventDefault(); cpGo(new Date(cur.getFullYear(), cur.getMonth() + (e.key === 'PageUp' ? -1 : 1), cur.getDate()), true); }
+  });
+  document.addEventListener('pointerdown', function (e) {
+    if (!pop.hidden && !pop.contains(e.target) && !(e.target.closest && e.target.closest('.cal'))) cpClose(false);
   });
 
   $('usarHoje').addEventListener('click', function () { $('dtHoje').value = ymd(new Date()); calc(); });

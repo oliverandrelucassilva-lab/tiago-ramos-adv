@@ -402,3 +402,33 @@ h1{font-size:clamp(2.3rem,5.8vw,4.4rem)}
 .legal h2{font-size:1.7rem;margin:34px 0 10px}
 .legal p,.legal li{color:var(--soft)}
 .legal ul{padding-left:20px;display:grid;gap:6px}
+
+/* ===== v4.1: calendário próprio ===== */
+.checker{overflow:visible}
+.checker .in{border-radius:26px 0 0 26px}
+.checker .out{border-radius:0 26px 26px 0}
+@media (max-width:860px){.checker .in{border-radius:26px 26px 0 0}.checker .out{border-radius:0 0 26px 26px}}
+.dfield{position:relative}
+.cal-pop{position:absolute;top:calc(100% + 10px);left:0;z-index:40;width:min(340px,calc(100vw - 40px));padding:18px;border-radius:22px;background:#fff;color:var(--paper-ink);box-shadow:0 36px 80px -18px rgba(5,13,34,.6),0 0 0 1px rgba(15,28,54,.08);animation:calin .22s cubic-bezier(.2,.8,.2,1) both;transform-origin:top left}
+.cal-pop[hidden]{display:none}
+.cal-pop.up{top:auto;bottom:calc(100% + 10px);transform-origin:bottom left}
+@keyframes calin{from{opacity:0;transform:translateY(-8px) scale(.97)}to{opacity:1;transform:none}}
+.cp-head{display:flex;align-items:center;gap:2px;margin-bottom:12px}
+.cp-title{flex:1;text-align:center;font:700 1.3rem/1 var(--disp);text-transform:uppercase;letter-spacing:.04em}
+.cp-nav{width:34px;height:34px;border:0;border-radius:50%;background:transparent;color:var(--blue-d);font-size:1.25rem;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .2s}
+.cp-nav:hover{background:#e8edf9}
+.cp-week,.cp-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cp-week span{text-align:center;font:600 .72rem var(--sans);letter-spacing:.08em;color:#8a96b2;padding:6px 0}
+.cp-day{aspect-ratio:1;border:0;border-radius:12px;background:transparent;color:var(--paper-ink);font:500 .95rem var(--sans);cursor:pointer;transition:background .15s,color .15s,transform .15s;font-variant-numeric:tabular-nums}
+.cp-day:hover{background:#e8edf9}
+.cp-day.cp-out{color:#b0b9cf}
+.cp-day.today{box-shadow:inset 0 0 0 2px var(--blue-d);color:var(--blue-d);font-weight:700}
+.cp-day.sel{background:linear-gradient(135deg,var(--blue-d),#1b4fd1);color:#fff;font-weight:700;box-shadow:0 8px 18px -6px rgba(47,107,255,.7)}
+.cp-day:focus-visible{outline:2px solid var(--blue-d);outline-offset:2px}
+.cp-foot{display:flex;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid #e3e8f3}
+.cp-link{border:0;background:none;color:var(--blue-d);font:600 .9rem var(--sans);cursor:pointer;padding:8px 10px;border-radius:10px}
+.cp-link:hover{background:#e8edf9}
+.cp-day{width:100%;min-width:0;align-self:start;padding:0}
+body.cal-open .fab{display:none}
+@media (max-width:560px){.cal-pop{width:auto;right:0}}
+@media (max-width:560px){.cp-title{font-size:1.05rem;letter-spacing:.02em}}
