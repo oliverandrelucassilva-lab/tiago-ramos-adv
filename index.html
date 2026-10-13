@@ -70,6 +70,17 @@
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-consumidor" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+  <symbol id="i-imobiliario" viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6M3 21h18"/></symbol>
+  <symbol id="i-civil" viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7V3Z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></symbol>
+  <symbol id="i-trabalho" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="1"/><path d="M9 8V5h6v3M3 13h18"/></symbol>
+  <symbol id="i-familia" viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M2.5 20c0-3.3 2.5-6 5.5-6s5.5 2.700 5.500 6M15 14.200c.6-.2 1.200-.3 2-.2 2.300.2 4 2.200 4 5"/></symbol>
+  <symbol id="i-previdenciario" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.500 3.200 7.700 8 9 4.800-1.300 8-4.500 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-administrativo" viewBox="0 0 24 24"><path d="M3 9 12 4l9 5H3ZM5 9v9M9.500 9v9M14.500 9v9M19 9v9M3 21h18"/></symbol>
+  <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
 <a class="skip" href="#conteudo">Ir para o conteúdo</a>
 
 <header class="top">
@@ -85,16 +96,38 @@
 </header>
 
 <div class="hero">
+  <img class="hero-mark" src="/assets/logo.png" alt="" aria-hidden="true" width="200" height="209">
   <div class="wrap hero-in">
-    <div>
-      <h1>Advocacia para pessoas e empresas na Bahia, em São Paulo, em Sergipe e em outros estados</h1>
+    <div class="hero-text">
+      <p class="eyebrow">Advocacia para pessoas e empresas</p>
+      <h1>Advocacia na Bahia, em São Paulo, em Sergipe e em outros estados</h1>
       <p class="lead">Atuação em direito do consumidor, imobiliário, civil, trabalhista, família, previdenciário e administrativo. Os processos são acompanhados de ponta a ponta pelo próprio advogado, também por meio eletrônico.</p>
+      <div class="entry">
+        <a class="entry-card" href="#imovel-atrasado">
+          <span class="entry-k">Direito imobiliário</span>
+          <strong>Imóvel na planta com atraso</strong>
+          <span class="entry-go">Conhecer os direitos <svg class="ico"><use href="#i-seta"/></svg></span>
+        </a>
+        <a class="entry-card" href="#isencao-ir">
+          <span class="entry-k">Direito tributário</span>
+          <strong>Isenção de IR por doença grave</strong>
+          <span class="entry-go">Ver quem tem direito <svg class="ico"><use href="#i-seta"/></svg></span>
+        </a>
+      </div>
     </div>
     <dl class="letterhead">
       <div><dt>Advogado responsável</dt><dd>Tiago Ramos</dd></div>
       <div><dt>Inscrições</dt><dd>OAB/BA 28.136<br>OAB/SP 526.256 (suplementar)</dd></div>
       <div><dt>E-mail</dt><dd><a href="mailto:tiago@tiagoramos.adv.br">tiago@tiagoramos.adv.br</a></dd></div>
     </dl>
+  </div>
+  <div class="wrap">
+    <ul class="law-strip" aria-label="Parâmetros previstos em lei, tratados nas abas do site">
+      <li><a href="#imovel-atrasado"><b><span class="count" data-to="180">180</span></b><span>dias de tolerância legal para a entrega do imóvel</span></a></li>
+      <li><a href="#imovel-atrasado"><b><span class="count" data-to="1">1</span>%</b><span>ao mês, parâmetro legal de indenização pelo atraso</span></a></li>
+      <li><a href="#isencao-ir"><b><span class="count" data-to="17">17</span></b><span>doenças previstas em lei para a isenção de IR</span></a></li>
+      <li><a href="#isencao-ir"><b><span class="count" data-to="5">5</span></b><span>anos para pedir a restituição do imposto retido</span></a></li>
+    </ul>
   </div>
 </div>
 
@@ -106,6 +139,7 @@
 -->
 <nav class="tabs" aria-label="Seções do site">
   <div class="wrap tabs-in">
+    <span class="tab-ind" aria-hidden="true"></span>
     <a href="#imovel-atrasado">Imóvel atrasado</a>
     <a href="#isencao-ir">Isenção de IR</a>
     <a href="#areas-de-atuacao">Áreas de atuação</a>
@@ -184,6 +218,10 @@
           </label>
         </form>
         <div class="out" aria-live="polite">
+          <div class="track" aria-hidden="true">
+            <div class="bar"><i class="t1"></i><i class="t2"></i><span class="pin" id="pin"></span></div>
+            <div class="bl"><span>Prazo contratual</span><span>Fim da tolerância</span><span>Atraso</span></div>
+          </div>
           <span id="status" class="badge warn">Informe a data de entrega prevista</span>
           <dl class="rows">
             <div><dt>Fim da tolerância de 180 dias</dt><dd id="rLimite">Não calculado</dd></div>
@@ -208,6 +246,8 @@
         <li><b>Material de venda</b><span>Folhetos, anúncios e prints que indiquem a data de entrega.</span></li>
         <li><b>Despesas do atraso</b><span>Contratos de aluguel e outros gastos causados pela espera.</span></li>
       </ul>
+
+      <a class="next" href="#isencao-ir"><span><small>Continue explorando</small><strong>Isenção de IR por doença grave</strong><em>Veja também: quem pode ter direito e como pedir a restituição.</em></span><svg class="ico"><use href="#i-seta"/></svg></a>
 
       <div class="panel-foot">
         <p class="disclaimer">Conteúdo de caráter informativo. Não substitui a análise do caso concreto por advogado, e os direitos descritos dependem das circunstâncias de cada contrato.</p>
@@ -237,6 +277,8 @@
         </div>
         <div>
           <h3 class="sub">As 17 doenças previstas em lei</h3>
+          <label class="search" for="busca-doenca">Buscar na lista <input type="search" id="busca-doenca" placeholder="Ex.: cardiopatia" autocomplete="off"></label>
+          <p class="search-empty" id="busca-vazio" hidden>Nenhuma doença da lista corresponde à busca.</p>
           <ol class="diseases">
             <li><span>01</span>Neoplasia maligna (câncer)</li>
             <li><span>02</span>Paralisia irreversível e incapacitante</li>
@@ -293,6 +335,8 @@
         </div>
       </div>
 
+      <a class="next" href="#areas-de-atuacao"><span><small>Continue explorando</small><strong>Áreas de atuação</strong><em>Conheça as áreas em que o escritório atua.</em></span><svg class="ico"><use href="#i-seta"/></svg></a>
+
       <div class="panel-foot">
         <p class="disclaimer">Conteúdo de caráter informativo. Não substitui a análise do caso concreto por advogado, e o reconhecimento da isenção depende da comprovação da doença e das circunstâncias de cada pessoa.</p>
         <a class="btn" href="#contato">Falar com o escritório</a>
@@ -308,14 +352,16 @@
         <h2 id="t-areas" tabindex="-1">Atendimento a pessoas e empresas em várias áreas do direito</h2>
       </div>
       <div class="areas">
-        <article><h3>Direito do Consumidor</h3><p>Questões decorrentes de relações de consumo, como contratos, cobranças e prestação de serviços.</p></article>
-        <article><h3>Direito Imobiliário</h3><p>Compra e venda de imóveis, atraso na entrega de obra, distrato, posse e propriedade.</p></article>
-        <article><h3>Direito Civil</h3><p>Contratos, responsabilidade civil, cobranças e demais questões do direito privado.</p></article>
-        <article><h3>Direito do Trabalho</h3><p>Questões entre empregados e empregadores, para trabalhadores e para empresas.</p></article>
-        <article><h3>Direito de Família</h3><p>Alimentos, divórcio, guarda, partilha de bens e inventário.</p></article>
-        <article><h3>Direito Previdenciário</h3><p>Aposentadorias, pensões, benefícios por incapacidade e revisões perante o INSS.</p></article>
-        <article><h3>Direito Administrativo</h3><p>Processos administrativos, contratos públicos e relações com órgãos da administração.</p></article>
+        <article><svg class="ai" aria-hidden="true"><use href="#i-consumidor"/></svg><h3>Direito do Consumidor</h3><p>Questões decorrentes de relações de consumo, como contratos, cobranças e prestação de serviços.</p></article>
+        <article><svg class="ai" aria-hidden="true"><use href="#i-imobiliario"/></svg><h3>Direito Imobiliário</h3><p>Compra e venda de imóveis, atraso na entrega de obra, distrato, posse e propriedade.</p></article>
+        <article><svg class="ai" aria-hidden="true"><use href="#i-civil"/></svg><h3>Direito Civil</h3><p>Contratos, responsabilidade civil, cobranças e demais questões do direito privado.</p></article>
+        <article><svg class="ai" aria-hidden="true"><use href="#i-trabalho"/></svg><h3>Direito do Trabalho</h3><p>Questões entre empregados e empregadores, para trabalhadores e para empresas.</p></article>
+        <article><svg class="ai" aria-hidden="true"><use href="#i-familia"/></svg><h3>Direito de Família</h3><p>Alimentos, divórcio, guarda, partilha de bens e inventário.</p></article>
+        <article><svg class="ai" aria-hidden="true"><use href="#i-previdenciario"/></svg><h3>Direito Previdenciário</h3><p>Aposentadorias, pensões, benefícios por incapacidade e revisões perante o INSS.</p></article>
+        <article><svg class="ai" aria-hidden="true"><use href="#i-administrativo"/></svg><h3>Direito Administrativo</h3><p>Processos administrativos, contratos públicos e relações com órgãos da administração.</p></article>
       </div>
+      <a class="next" href="#onde-atuamos"><span><small>Continue explorando</small><strong>Onde atuamos</strong><em>Veja os estados e tribunais de atuação.</em></span><svg class="ico"><use href="#i-seta"/></svg></a>
+
       <div class="panel-foot">
         <p class="disclaimer">Conteúdo de caráter informativo. A indicação das áreas não representa promessa de resultado, e cada situação depende de análise individual por advogado.</p>
         <a class="btn" href="#contato">Falar com o escritório</a>
@@ -336,6 +382,8 @@
         <article class="card"><h3>São Paulo</h3><p>OAB/SP 526.256 (suplementar)</p></article>
         <article class="card"><h3>Sergipe</h3><p>Atuação e acompanhamento de processos.</p></article>
       </div>
+      <a class="next" href="#contato"><span><small>Continue explorando</small><strong>Contato</strong><em>Fale com o escritório por e-mail.</em></span><svg class="ico"><use href="#i-seta"/></svg></a>
+
       <div class="panel-foot">
         <p class="disclaimer">Conteúdo de caráter informativo.</p>
         <a class="btn" href="#contato">Falar com o escritório</a>
