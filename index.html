@@ -29,6 +29,82 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/assets/style.css">
 <script>document.documentElement.className="js"</script>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)}</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script src="/assets/config.js"></script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "inLanguage": "pt-BR",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Qual é a tolerância de atraso que a construtora pode ter?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A lei admite tolerância de até 180 dias além da data prevista no contrato, desde que esteja prevista de forma clara e destacada (Lei 4.591/64, art. 43-A)."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "O que o comprador pode fazer depois da tolerância?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Há duas opções previstas em lei: desfazer o contrato, com devolução integral dos valores pagos em até 60 dias, ou manter o contrato e receber indenização de 1% do valor pago por mês de atraso."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "A construtora pode cobrar juros de obra depois do prazo de entrega?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Segundo o STJ (Tema 996), a cobrança de juros de obra depois do prazo de entrega, já incluída a tolerância, é considerada ilícita."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "O atraso pode gerar outras indenizações?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Dependendo do caso, podem ser analisados aluguel e lucros cessantes, a inversão da multa contratual e danos morais. Os critérios dependem do contrato e de cada situação."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Quem pode ter isenção de Imposto de Renda por doença grave?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A isenção alcança aposentados, pensionistas e militares da reserva ou reforma com doença prevista em lei, sobre os rendimentos de aposentadoria, pensão, reserva ou reforma (Lei 7.713/1988, art. 6º, XIV)."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Quem já está curado perde o direito?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Não necessariamente. Segundo a Súmula 627 do STJ, a isenção não exige sintomas atuais nem recidiva da doença."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Quem ainda trabalha tem isenção sobre o salário?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Não. A isenção não alcança o salário de quem está na ativa, e sim os proventos de inatividade (STJ, Tema Repetitivo 1.037)."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "É possível pedir de volta o imposto já descontado?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sim, em regra limitado aos últimos 5 anos e ao período posterior ao diagnóstico (art. 168 do CTN). O pedido pode ser administrativo ou judicial."
+   }
+  }
+ ]
+}
+</script>
 
 <script type="application/ld+json">
 {
@@ -80,6 +156,8 @@
   <symbol id="i-administrativo" viewBox="0 0 24 24"><path d="M3 9 12 4l9 5H3ZM5 9v9M9.500 9v9M14.500 9v9M19 9v9M3 21h18"/></symbol>
   <symbol id="i-raio" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></symbol>
   <symbol id="i-calendario" viewBox="0 0 24 24"><rect x="3.500" y="5" width="17" height="15" rx="2"/><path d="M3.500 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-compartilhar" viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.500"/><circle cx="18" cy="6" r="2.500"/><circle cx="18" cy="18" r="2.500"/><path d="m8.200 10.900 7.600-3.800M8.200 13.100l7.600 3.800"/></symbol>
+  <symbol id="i-baixar" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></symbol>
   <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
 </svg>
 
@@ -247,6 +325,11 @@
             <div><dt>Parâmetro legal de 1% ao mês sobre o valor pago</dt><dd id="rIndeniz">Não calculado</dd></div>
           </dl>
           <p class="note">Cálculo informativo, sem correção monetária, com base no art. 43-A da Lei 4.591/64, contando o tempo de atraso de forma proporcional a partir do fim da tolerância de 180 dias. O valor devido depende do contrato, da data efetiva de entrega das chaves e do entendimento do tribunal. Este cálculo não representa promessa de resultado nem substitui a análise do caso por advogado.</p>
+          <div class="result-cta" id="calcCta" hidden>
+            <button type="button" class="btn small" id="btnIcs"><svg class="ico"><use href="#i-baixar"/></svg>Salvar a data no calendário</button>
+            <button type="button" class="btn small ghost-l" id="btnEnviarCalculo">Enviar este cálculo ao escritório</button>
+          </div>
+          <p class="note saved" id="savedNote" hidden>Os dados ficam salvos apenas neste navegador, para você retomar depois.</p>
         </div>
       </div>
 
@@ -255,20 +338,38 @@
         <h3 class="sub">Documentos que ajudam na análise</h3>
         <p>Com estes documentos é possível verificar o prazo efetivo, a cláusula de tolerância e os valores envolvidos.</p>
       </div>
-      <ul class="docs">
-        <li><b>Contrato de compra e venda</b><span>Compromisso ou promessa de compra e venda, com aditivos.</span></li>
-        <li><b>Comprovantes de pagamento</b><span>Sinal, parcelas mensais, intermediárias e chaves.</span></li>
-        <li><b>Contrato de financiamento</b><span>Se houver, com os extratos de juros de obra.</span></li>
-        <li><b>Comunicados da construtora</b><span>E-mails, cartas e mensagens sobre prorrogação do prazo.</span></li>
-        <li><b>Material de venda</b><span>Folhetos, anúncios e prints que indiquem a data de entrega.</span></li>
-        <li><b>Despesas do atraso</b><span>Contratos de aluguel e outros gastos causados pela espera.</span></li>
+      <ul class="docs" id="docsList">
+        <li><label class="chk"><input type="checkbox" data-doc="Contrato de compra e venda"><span class="box" aria-hidden="true"></span><span class="txt"><b>Contrato de compra e venda</b><span>Compromisso ou promessa de compra e venda, com aditivos.</span></span></label></li>
+        <li><label class="chk"><input type="checkbox" data-doc="Comprovantes de pagamento"><span class="box" aria-hidden="true"></span><span class="txt"><b>Comprovantes de pagamento</b><span>Sinal, parcelas mensais, intermediárias e chaves.</span></span></label></li>
+        <li><label class="chk"><input type="checkbox" data-doc="Contrato de financiamento"><span class="box" aria-hidden="true"></span><span class="txt"><b>Contrato de financiamento</b><span>Se houver, com os extratos de juros de obra.</span></span></label></li>
+        <li><label class="chk"><input type="checkbox" data-doc="Comunicados da construtora"><span class="box" aria-hidden="true"></span><span class="txt"><b>Comunicados da construtora</b><span>E-mails, cartas e mensagens sobre prorrogação do prazo.</span></span></label></li>
+        <li><label class="chk"><input type="checkbox" data-doc="Material de venda"><span class="box" aria-hidden="true"></span><span class="txt"><b>Material de venda</b><span>Folhetos, anúncios e prints que indiquem a data de entrega.</span></span></label></li>
+        <li><label class="chk"><input type="checkbox" data-doc="Despesas do atraso"><span class="box" aria-hidden="true"></span><span class="txt"><b>Despesas do atraso</b><span>Contratos de aluguel e outros gastos causados pela espera.</span></span></label></li>
       </ul>
+      <div class="docs-bar">
+        <div class="meter" aria-hidden="true"><i id="docsFill"></i></div>
+        <p id="docsCount" aria-live="polite">0 de 6 documentos reunidos</p>
+        <div class="docs-actions">
+          <button type="button" class="btn small ghost" id="docsCopy">Copiar lista</button>
+          <button type="button" class="btn small ghost" id="docsSend">Enviar ao escritório</button>
+        </div>
+      </div>
+      <p class="note-d">Marque o que você já tem. Sua marcação fica salva apenas neste navegador.</p>
+
+      <h3 class="sub">Perguntas frequentes</h3>
+      <div class="faq">
+        <details><summary>Qual é a tolerância de atraso que a construtora pode ter?</summary><p>A lei admite tolerância de até 180 dias além da data prevista no contrato, desde que esteja prevista de forma clara e destacada (Lei 4.591/64, art. 43-A).</p></details>
+        <details><summary>O que o comprador pode fazer depois da tolerância?</summary><p>Há duas opções previstas em lei: desfazer o contrato, com devolução integral dos valores pagos em até 60 dias, ou manter o contrato e receber indenização de 1% do valor pago por mês de atraso.</p></details>
+        <details><summary>A construtora pode cobrar juros de obra depois do prazo de entrega?</summary><p>Segundo o STJ (Tema 996), a cobrança de juros de obra depois do prazo de entrega, já incluída a tolerância, é considerada ilícita.</p></details>
+        <details><summary>O atraso pode gerar outras indenizações?</summary><p>Dependendo do caso, podem ser analisados aluguel e lucros cessantes, a inversão da multa contratual e danos morais. Os critérios dependem do contrato e de cada situação.</p></details>
+      </div>
+
 
       <a class="next" href="#isencao-ir"><span><small>Continue explorando</small><strong>Isenção de IR por doença grave</strong><em>Veja também: quem pode ter direito e como pedir a restituição.</em></span><svg class="ico"><use href="#i-seta"/></svg></a>
 
       <div class="panel-foot">
         <p class="disclaimer">Conteúdo de caráter informativo. Não substitui a análise do caso concreto por advogado, e os direitos descritos dependem das circunstâncias de cada contrato.</p>
-        <a class="btn" href="#contato">Falar com o escritório</a>
+        <a class="btn" href="#contato" data-assunto="imovel">Falar com o escritório</a>
       </div>
     </div>
   </section>
@@ -318,6 +419,25 @@
         </div>
       </div>
 
+      <div class="verifier" id="verificador">
+        <div class="vf-in">
+          <h3 class="sub">Verificador informativo</h3>
+          <p class="vf-lead">Escolha a situação e a doença para ver como a lei trata o caso, em tese. É uma orientação geral, sem análise individual.</p>
+          <div class="fld"><label for="vfSit">Situação atual</label>
+            <select id="vfSit">
+              <option value="">Selecione</option>
+              <option value="aposentado">Aposentado(a)</option>
+              <option value="pensionista">Pensionista</option>
+              <option value="militar">Militar da reserva ou reforma</option>
+              <option value="ativa">Ainda trabalhando</option>
+              <option value="outra">Outra situação</option>
+            </select></div>
+          <div class="fld"><label for="vfDoenca">Doença</label>
+            <select id="vfDoenca"><option value="">Selecione</option></select></div>
+        </div>
+        <div class="vf-out" id="vfOut" aria-live="polite"><p class="vf-empty">Selecione as duas opções ao lado para ver o resultado informativo.</p></div>
+      </div>
+
       <h3 class="sub facts-title">Pontos de atenção</h3>
       <div class="grid3">
         <article class="card">
@@ -352,11 +472,19 @@
         </div>
       </div>
 
+      <h3 class="sub">Perguntas frequentes</h3>
+      <div class="faq">
+        <details><summary>Quem pode ter isenção de Imposto de Renda por doença grave?</summary><p>A isenção alcança aposentados, pensionistas e militares da reserva ou reforma com doença prevista em lei, sobre os rendimentos de aposentadoria, pensão, reserva ou reforma (Lei 7.713/1988, art. 6º, XIV).</p></details>
+        <details><summary>Quem já está curado perde o direito?</summary><p>Não necessariamente. Segundo a Súmula 627 do STJ, a isenção não exige sintomas atuais nem recidiva da doença.</p></details>
+        <details><summary>Quem ainda trabalha tem isenção sobre o salário?</summary><p>Não. A isenção não alcança o salário de quem está na ativa, e sim os proventos de inatividade (STJ, Tema Repetitivo 1.037).</p></details>
+        <details><summary>É possível pedir de volta o imposto já descontado?</summary><p>Sim, em regra limitado aos últimos 5 anos e ao período posterior ao diagnóstico (art. 168 do CTN). O pedido pode ser administrativo ou judicial.</p></details>
+      </div>
+
       <a class="next" href="#areas-de-atuacao"><span><small>Continue explorando</small><strong>Áreas de atuação</strong><em>Conheça as áreas em que o escritório atua.</em></span><svg class="ico"><use href="#i-seta"/></svg></a>
 
       <div class="panel-foot">
         <p class="disclaimer">Conteúdo de caráter informativo. Não substitui a análise do caso concreto por advogado, e o reconhecimento da isenção depende da comprovação da doença e das circunstâncias de cada pessoa.</p>
-        <a class="btn" href="#contato">Falar com o escritório</a>
+        <a class="btn" href="#contato" data-assunto="ir">Falar com o escritório</a>
       </div>
     </div>
   </section>
@@ -414,34 +542,56 @@
       <div class="sec-head">
         <p class="chip-row"><span class="chip"><b>05</b> / Contato</span><span class="chip-sub">Atendimento</span></p>
         <h2 id="t-contato" tabindex="-1">Fale com o <em>escritório</em></h2>
-        <p>Envie um e-mail com um resumo do assunto. O retorno é feito pelo próprio advogado.</p>
+        <p>Envie uma mensagem pelo formulário ou por e-mail, com um resumo do assunto. O retorno é feito pelo próprio advogado.</p>
       </div>
       <div class="contact-grid">
         <div>
-          <dl class="contact-list">
+          <dl class="contact-list" id="contactList">
             <div><dt>Advogado responsável</dt><dd>Tiago Ramos</dd></div>
             <div><dt>Inscrições na OAB</dt><dd>OAB/BA 28.136<br>OAB/SP 526.256 (suplementar)</dd></div>
             <div><dt>E-mail</dt><dd id="mail">tiago@tiagoramos.adv.br</dd></div>
-            <!--
-              INSTAGRAM: quando o @ do perfil estiver definido, remova os marcadores de comentário
-              deste bloco e troque PERFIL pelo @ (sem o arroba). Acrescente também a URL ao "sameAs"
-              do JSON-LD no topo deste arquivo.
-            <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/PERFIL/" target="_blank" rel="noopener">@PERFIL</a></dd></div>
-            -->
           </dl>
           <div class="mailbox">
             <a class="btn" href="mailto:tiago@tiagoramos.adv.br?subject=Contato%20pelo%20site">Enviar e-mail</a>
             <button class="btn ghost" type="button" id="copyBtn">Copiar e-mail</button>
             <span id="copied" role="status"></span>
           </div>
+          <div class="mailbox" id="canaisExtra"></div>
+          <p class="fine">O retorno é feito pelo próprio advogado. O envio de uma mensagem não cria, por si só, relação entre advogado e cliente.</p>
         </div>
-        <div class="card">
-          <h3>Na mensagem, informe</h3>
-          <ol class="steps">
-            <li>Nome completo e cidade onde mora.</li>
-            <li>Assunto ou motivo do contato.</li>
-          </ol>
-        </div>
+        <form class="cform" id="contatoForm" novalidate>
+          <h3 class="sub">Envie uma mensagem</h3>
+          <div class="row2">
+            <div class="fld"><label for="cfNome">Nome completo</label><input id="cfNome" name="nome" type="text" autocomplete="name" required></div>
+            <div class="fld"><label for="cfCidade">Cidade e estado</label><input id="cfCidade" name="cidade" type="text" autocomplete="address-level2" placeholder="Ex.: Salvador, BA" required></div>
+          </div>
+          <div class="row2">
+            <div class="fld"><label for="cfEmail">E-mail</label><input id="cfEmail" name="email" type="email" autocomplete="email" inputmode="email"></div>
+            <div class="fld"><label for="cfTel">Telefone <span class="hint">opcional se informar o e-mail</span></label><input id="cfTel" name="telefone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000"></div>
+          </div>
+          <div class="fld"><label for="cfAssunto">Assunto</label>
+            <select id="cfAssunto" name="assunto">
+              <option value="imovel">Imóvel na planta com atraso</option>
+              <option value="ir">Isenção de IR por doença grave</option>
+              <option value="consumidor">Direito do Consumidor</option>
+              <option value="imobiliario">Direito Imobiliário</option>
+              <option value="civil">Direito Civil</option>
+              <option value="trabalho">Direito do Trabalho</option>
+              <option value="familia">Direito de Família</option>
+              <option value="previdenciario">Direito Previdenciário</option>
+              <option value="administrativo">Direito Administrativo</option>
+              <option value="outro" selected>Outro assunto</option>
+            </select></div>
+          <div class="fld"><label for="cfMsg">Resumo do assunto <span class="hint">evite enviar documentos ou dados sensíveis neste primeiro contato</span></label><textarea id="cfMsg" name="mensagem" rows="5" required></textarea></div>
+          <div class="hp" aria-hidden="true"><label>Não preencha <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+          <label class="consent"><input type="checkbox" id="cfOk" required><span>Autorizo o uso dos dados informados somente para o retorno deste contato, conforme a <a href="/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label>
+          <p class="field-err" id="cfErr" role="alert" hidden></p>
+          <div class="form-actions">
+            <button class="btn" type="submit" id="cfEnviar">Enviar mensagem</button>
+            <button class="btn ghost" type="button" id="cfCopiar" hidden>Copiar mensagem</button>
+          </div>
+          <p class="form-ok" id="cfOkMsg" role="status" hidden></p>
+        </form>
       </div>
       <div class="panel-foot">
         <p class="disclaimer">Conteúdo de caráter informativo. Este site não substitui a análise do caso por advogado.</p>
@@ -455,9 +605,13 @@
   <div class="wrap foot-in">
     <span>Tiago Ramos Consultoria e Assessoria Jurídica · Tiago Ramos, OAB/BA 28.136 · OAB/SP 526.256 (suplementar)</span>
     <span>Conteúdo de caráter informativo, conforme o Código de Ética e o Provimento 205/2021 do CFOAB. Não substitui a análise do caso por advogado.</span>
+    <span><a href="/privacidade.html">Política de Privacidade</a></span>
   </div>
 </footer>
 
+<a class="fab" id="fab" href="#contato" hidden>Falar com o escritório</a>
+
 <script src="/assets/app.js" defer></script>
+<script src="/assets/leads.js" defer></script>
 </body>
 </html>

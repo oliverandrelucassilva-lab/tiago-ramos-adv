@@ -177,6 +177,7 @@
       st.textContent = !c ? 'Informe a data de entrega prevista' : 'Informe a data de referência';
       out.forEach(function (i) { $(i).textContent = NC; });
       $('pin').style.left = '0%';
+      document.dispatchEvent(new CustomEvent('calc', { detail: null }));
       return;
     }
     var lim = new Date(c.getTime() + 180 * DAY);
@@ -188,6 +189,7 @@
     var v = parseMoney($('valorPago').value);
     $('rIndeniz').textContent = (dT > 0 && v > 0) ? brl(v * 0.01 * (dT / MES)) : NC;
     $('pin').style.left = Math.max(0, Math.min(100, (dC / 360) * 100)) + '%';
+    document.dispatchEvent(new CustomEvent('calc', { detail: { c: c, r: r, lim: lim, dC: dC, dT: dT, v: v, indeniz: (dT > 0 && v > 0) ? v * 0.01 * (dT / MES) : 0 } }));
     if (dC <= 0) { st.className = 'badge ok'; st.textContent = 'Dentro do prazo contratual'; }
     else if (dT <= 0) { st.className = 'badge warn'; st.textContent = 'No período de tolerância (' + (-dT) + ' dias restantes)'; }
     else { st.className = 'badge bad'; st.textContent = 'Atraso além da tolerância legal'; }

@@ -14,6 +14,18 @@ Landing page estática (HTML, CSS e JS puros, sem build). Deploy na Vercel como 
 
 O JavaScript não precisa de alteração.
 
+## Configuração (assets/config.js)
+- `whatsapp`: número com DDI e DDD (ex.: `5571900000000`). Em branco, o botão não aparece.
+- `instagram`: o @ sem o arroba. Em branco, o link não aparece. Ao definir, acrescente a URL em `sameAs` no JSON-LD de `index.html`.
+- `formEndpoint`: endereço de um serviço de formulário (ex.: Formspree). Em branco, o formulário abre o app de e-mail do visitante com a mensagem pronta.
+
+## Funcionalidades de contato (assets/leads.js)
+Todas dependem de uma ação do visitante: formulário com consentimento (LGPD), botão fixo de contato, envio do resultado da calculadora e do verificador ao formulário, lembrete de calendário (.ics), checklist de documentos salvo no navegador, FAQ (também em dados estruturados FAQPage), compartilhar e Política de Privacidade (`privacidade.html`, texto-base a ser revisado pelo advogado).
+Deliberadamente fora, por conflito com o Código de Ética e o Provimento 205/2021 da OAB: pop-up de saída, urgência ou escassez, contador regressivo, "consulta grátis", promoções e depoimentos.
+
+## Estatísticas
+O site inclui o script de Web Analytics da Vercel (sem cookies). Para ativar, habilite "Web Analytics" no painel do projeto na Vercel.
+
 ## Pendências
 - **Domínio:** o código usa `https://tiagoramos.adv.br` (canonical, Open Graph, JSON-LD, sitemap, robots). Ao definir o domínio final, substitua em `index.html`, `sitemap.xml` e `robots.txt`.
 - **Instagram:** há um bloco comentado na aba Contato. Ative com o @ definitivo e acrescente `sameAs` ao JSON-LD.
