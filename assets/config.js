@@ -7,5 +7,5 @@
 window.SITE_CONFIG = {
   instagram: "tr.juridico",
   formAccessKey: "",
-  formEndpoint: ""
+  formEndpoint: "https://formspree.io/f/mbgdzvek"
 };
