@@ -310,3 +310,27 @@
     try { navigator.clipboard.writeText(t).then(done, sel); } catch (e) { sel(); }
   });
 })();
+
+/* Imagem ilustrativa da aba Imóvel: se existirem imovel-desktop / imovel-mobile (.webp, .jpg ou .png)
+   em /assets/img/, elas substituem a ilustração provisória em SVG automaticamente. */
+(function () {
+  var fig = document.getElementById('imovelArt');
+  if (!fig) return;
+  var img = fig.querySelector('img'), mq = window.matchMedia('(max-width: 860px)'), token = 0;
+  function swap() {
+    var my = ++token, base = '/assets/img/imovel-' + (mq.matches ? 'mobile' : 'desktop'), exts = ['.webp', '.jpg', '.png'];
+    (function next(i) {
+      if (i >= exts.length || my !== token) return;
+      var t = new Image();
+      t.onload = function () {
+        if (my !== token) return;
+        Array.prototype.forEach.call(fig.querySelectorAll('source'), function (s) { s.parentNode.removeChild(s); });
+        img.src = base + exts[i];
+      };
+      t.onerror = function () { next(i + 1); };
+      t.src = base + exts[i];
+    })(0);
+  }
+  swap();
+  if (mq.addEventListener) mq.addEventListener('change', swap);
+})();
