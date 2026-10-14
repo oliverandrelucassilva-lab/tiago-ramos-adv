@@ -325,10 +325,10 @@
       t.onload = function () {
         if (my !== token) return;
         Array.prototype.forEach.call(fig.querySelectorAll('source'), function (s) { s.parentNode.removeChild(s); });
-        img.src = base + exts[i];
+        img.src = base + exts[i] + '?v=20261014';
       };
       t.onerror = function () { next(i + 1); };
-      t.src = base + exts[i];
+      t.src = base + exts[i] + '?v=20261014';
     })(0);
   }
   swap();
