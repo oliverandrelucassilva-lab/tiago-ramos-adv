@@ -311,14 +311,13 @@
   });
 })();
 
-/* Imagem ilustrativa da aba Imóvel: se existirem imovel-desktop / imovel-mobile (.webp, .jpg ou .png)
-   em /assets/img/, elas substituem a ilustração provisória em SVG automaticamente. */
-(function () {
-  var fig = document.getElementById('imovelArt');
-  if (!fig) return;
+/* Imagens ilustrativas das abas (figuras com data-art): se existirem <nome>-desktop / <nome>-mobile
+   (.webp, .jpg ou .png) em /assets/img/, elas substituem a ilustração provisória em SVG automaticamente. */
+Array.prototype.forEach.call(document.querySelectorAll('.art[data-art]'), function (fig) {
+  var key = fig.getAttribute('data-art');
   var img = fig.querySelector('img'), mq = window.matchMedia('(max-width: 860px)'), token = 0;
   function swap() {
-    var my = ++token, base = '/assets/img/imovel-' + (mq.matches ? 'mobile' : 'desktop'), exts = ['.webp', '.jpg', '.png'];
+    var my = ++token, base = '/assets/img/' + key + '-' + (mq.matches ? 'mobile' : 'desktop'), exts = ['.webp', '.jpg', '.png'];
     (function next(i) {
       if (i >= exts.length || my !== token) return;
       var t = new Image();
@@ -333,4 +332,4 @@
   }
   swap();
   if (mq.addEventListener) mq.addEventListener('change', swap);
-})();
+});
