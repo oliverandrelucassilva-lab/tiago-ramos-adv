@@ -456,3 +456,17 @@ body.cal-open .fab{display:none}
   .panel-hero{grid-template-columns:1fr;gap:26px}
   .art{aspect-ratio:16/10;border-radius:22px}
 }
+
+/* ===== v4.4: contato empilhado no celular ===== */
+@media (max-width:860px){
+  .contact-grid{grid-template-columns:1fr;gap:28px}
+  .contact-list{gap:16px}
+  .mailbox .btn{flex:1 1 auto}
+  .fine{max-width:none}
+}
+@media (max-width:480px){
+  .cform{padding:20px 16px;border-radius:22px}
+  .cform .sub{font-size:1.7rem}
+  .form-actions .btn{flex:1 1 100%}
+}
+[hidden]{display:none!important}
