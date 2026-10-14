@@ -28,4 +28,4 @@ O site inclui o script de Web Analytics da Vercel (sem cookies). Para ativar, ha
 
 ## Pendências
 - **Domínio:** o código usa `https://tiagoramos.adv.br` (canonical, Open Graph, JSON-LD, sitemap, robots). Ao definir o domínio final, substitua em `index.html`, `sitemap.xml` e `robots.txt`.
-- **Instagram:** há um bloco comentado na aba Contato. Ative com o @ definitivo e acrescente `sameAs` ao JSON-LD.
+- **Instagram:** configurado como `tr.juridico` em `assets/config.js` e em `sameAs` no JSON-LD.

@@ -5,7 +5,7 @@
    formEndpoint: endereço do formulário no Formspree (https://formspree.io/f/xxxxxxx). Use este campo OU o formAccessKey.
    Com os dois em branco, o formulário abre o aplicativo de e-mail do visitante com a mensagem pronta. */
 window.SITE_CONFIG = {
-  instagram: "",
+  instagram: "tr.juridico",
   formAccessKey: "",
   formEndpoint: ""
 };
