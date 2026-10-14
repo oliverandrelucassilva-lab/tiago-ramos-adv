@@ -17,7 +17,7 @@ O JavaScript não precisa de alteração.
 ## Configuração (assets/config.js)
 - `instagram`: o @ sem o arroba. Em branco, o link não aparece. Ao definir, acrescente a URL em `sameAs` no JSON-LD de `index.html`.
 - `formAccessKey`: chave (access_key) do formulário no SplitForms. Preenchida, o formulário envia a mensagem direto para o e-mail cadastrado no SplitForms.
-- `formEndpoint`: só para outro serviço de formulário (ex.: Formspree). Normalmente em branco. Com os dois em branco, o formulário abre o app de e-mail do visitante com a mensagem pronta.
+- `formEndpoint`: endereço do formulário no Formspree (`https://formspree.io/f/xxxxxxx`). Use este campo ou o `formAccessKey`, conforme o serviço escolhido. Com os dois em branco, o formulário abre o app de e-mail do visitante com a mensagem pronta.
 
 ## Funcionalidades de contato (assets/leads.js)
 Todas dependem de uma ação do visitante: formulário com consentimento (LGPD), botão fixo de contato, envio do resultado da calculadora e do verificador ao formulário, lembrete de calendário (.ics), checklist de documentos salvo no navegador, FAQ (também em dados estruturados FAQPage), compartilhar e Política de Privacidade (`privacidade.html`, texto-base a ser revisado pelo advogado).

@@ -80,6 +80,7 @@
         var fd = new FormData();
         if (cfg.formAccessKey) fd.append('access_key', cfg.formAccessKey);
         fd.append('subject', 'Contato pelo site: ' + d.assunto);
+        fd.append('_subject', 'Contato pelo site: ' + d.assunto);
         fd.append('name', d.nome);
         fd.append('email', d.email);
         fd.append('replyto', d.email);
