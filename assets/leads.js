@@ -74,11 +74,24 @@
       if (form.website && form.website.value) { showOk('Mensagem enviada.'); return; }
 
       var btn = $('cfEnviar');
-      if (cfg.formEndpoint) {
+      var endpoint = cfg.formEndpoint || (cfg.formAccessKey ? 'https://splitforms.com/api/submit' : '');
+      if (endpoint) {
         btn.disabled = true; btn.textContent = 'Enviando...';
-        fetch(cfg.formEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(d) })
-          .then(function (r) {
-            if (!r.ok) throw new Error('http');
+        var fd = new FormData();
+        if (cfg.formAccessKey) fd.append('access_key', cfg.formAccessKey);
+        fd.append('subject', 'Contato pelo site: ' + d.assunto);
+        fd.append('name', d.nome);
+        fd.append('email', d.email);
+        fd.append('replyto', d.email);
+        fd.append('telefone', d.telefone);
+        fd.append('cidade', d.cidade);
+        fd.append('assunto', d.assunto);
+        fd.append('message', d.mensagem);
+        fd.append('botcheck', '');
+        fetch(endpoint, { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd })
+          .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok && j.success !== false }; }); })
+          .then(function (res) {
+            if (!res.ok) throw new Error('falha');
             showOk('Mensagem enviada. O retorno será feito pelo advogado, no contato informado.');
             track('form_enviado'); form.reset(); $('cfAssunto').value = 'outro';
           })
