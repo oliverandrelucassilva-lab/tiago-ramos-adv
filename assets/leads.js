@@ -132,6 +132,13 @@
     if (waBtn) { waBtn.href = waUrl; waBtn.hidden = false; waBtn.addEventListener('click', function () { track('whatsapp', { onde: 'contato' }); }); }
     if (mailBtn) mailBtn.hidden = true;
     if (lead) lead.textContent = 'Fale pelo WhatsApp, envie uma mensagem pelo formulário ou por e-mail, com um resumo do assunto. O retorno é feito pelo próprio advogado.';
+    var hw = $('heroWa');
+    if (hw) {
+      var a = hw.querySelector('a'), n = WA.slice(2);
+      a.href = waUrl; a.textContent = '(' + n.slice(0, 2) + ') ' + n.slice(2, n.length - 4) + '-' + n.slice(-4);
+      a.addEventListener('click', function () { track('whatsapp', { onde: 'inicio' }); });
+      hw.hidden = false;
+    }
     var fabEl = $('fab');
     if (fabEl) { fabEl.href = waUrl; fabEl.target = '_blank'; fabEl.rel = 'noopener noreferrer'; fabEl.textContent = 'Falar pelo WhatsApp'; }
   }
