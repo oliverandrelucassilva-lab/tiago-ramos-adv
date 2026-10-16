@@ -140,7 +140,7 @@
       hw.hidden = false;
     }
     var fabEl = $('fab');
-    if (fabEl) { fabEl.href = waUrl; fabEl.target = '_blank'; fabEl.rel = 'noopener noreferrer'; fabEl.textContent = 'Falar pelo WhatsApp'; }
+    if (fabEl) { fabEl.href = waUrl; fabEl.target = '_blank'; fabEl.rel = 'noopener noreferrer'; fabEl.innerHTML = '<svg class="ico ico-wa" aria-hidden="true"><use href="#i-wa"/></svg>'; fabEl.setAttribute('aria-label', 'Falar pelo WhatsApp'); fabEl.title = 'Falar pelo WhatsApp'; fabEl.classList.add('fab-wa'); }
   }
 
   /* ---------- Calculadora: salvar dados, enviar cálculo e lembrete no calendário ---------- */
@@ -249,11 +249,11 @@
   /* ---------- Botão fixo de contato (discreto, sem urgência) ---------- */
   var fab = $('fab');
   function fabUpdate() {
-    var show = scrollY > 600 && location.hash !== '#contato';
+    var show = fab.classList.contains('fab-wa') ? scrollY > 300 : (scrollY > 600 && location.hash !== '#contato');
     fab.hidden = !show;
   }
   window.addEventListener('scroll', fabUpdate, { passive: true });
   window.addEventListener('hashchange', fabUpdate);
   fabUpdate();
-  fab.addEventListener('click', function () { track('fab'); });
+  fab.addEventListener('click', function () { track(fab.classList.contains('fab-wa') ? 'whatsapp' : 'fab', fab.classList.contains('fab-wa') ? { onde: 'botao-fixo' } : undefined); });
 })();
