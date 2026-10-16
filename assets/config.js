@@ -7,7 +7,7 @@
    Com os dois em branco, o formulário abre o aplicativo de e-mail do visitante com a mensagem pronta. */
 window.SITE_CONFIG = {
   instagram: "tr.juridico",
-  whatsapp: "",
+  whatsapp: "557199468421",
   formAccessKey: "",
   formEndpoint: "https://formspree.io/f/mbgdzvek"
 };
