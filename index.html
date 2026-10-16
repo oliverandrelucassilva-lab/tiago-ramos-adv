@@ -31,7 +31,7 @@
 <script>document.documentElement.className="js"</script>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)}</script>
 <script defer src="/_vercel/insights/script.js"></script>
-<script src="/assets/config.js?v=20261014c"></script>
+<script src="/assets/config.js?v=20261016"></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -563,7 +563,7 @@
       <div class="sec-head">
         <p class="chip-row"><span class="chip"><b>05</b> / Contato</span><span class="chip-sub">Atendimento</span></p>
         <h2 id="t-contato" tabindex="-1">Fale com o <em>escritório</em></h2>
-        <p>Envie uma mensagem pelo formulário ou por e-mail, com um resumo do assunto. O retorno é feito pelo próprio advogado.</p>
+        <p id="contatoLead">Envie uma mensagem pelo formulário ou por e-mail, com um resumo do assunto. O retorno é feito pelo próprio advogado.</p>
       </div>
       <div class="contact-grid">
         <div>
@@ -573,7 +573,8 @@
             <div><dt>E-mail</dt><dd id="mail">tiago@tiagoramos.adv.br</dd></div>
           </dl>
           <div class="mailbox">
-            <a class="btn" href="mailto:tiago@tiagoramos.adv.br?subject=Contato%20pelo%20site">Enviar e-mail</a>
+            <a class="btn" id="waBtn" href="#" target="_blank" rel="noopener noreferrer" hidden>Falar pelo WhatsApp</a>
+            <a class="btn" id="mailBtn" href="mailto:tiago@tiagoramos.adv.br?subject=Contato%20pelo%20site">Enviar e-mail</a>
             <button class="btn ghost" type="button" id="copyBtn">Copiar e-mail</button>
             <span id="copied" role="status"></span>
           </div>
@@ -632,6 +633,6 @@
 <a class="fab" id="fab" href="#contato" hidden>Falar com o escritório</a>
 
 <script src="/assets/app.js?v=20261014" defer></script>
-<script src="/assets/leads.js?v=20261014" defer></script>
+<script src="/assets/leads.js?v=20261016" defer></script>
 </body>
 </html>

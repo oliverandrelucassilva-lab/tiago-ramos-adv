@@ -123,6 +123,19 @@
     list.appendChild(di);
   }
 
+  /* ---------- WhatsApp opcional (config.js) ----------
+     Com o número preenchido, o botão do WhatsApp aparece no lugar do botão de e-mail e o botão fixo também abre a conversa. */
+  var WA = String(cfg.whatsapp || '').replace(/\D/g, '');
+  if (/^55\d{10,11}$/.test(WA)) {
+    var waUrl = 'https://wa.me/' + WA + '?text=' + encodeURIComponent('Olá, vim pelo site e gostaria de falar com o advogado Tiago Ramos.');
+    var waBtn = $('waBtn'), mailBtn = $('mailBtn'), lead = $('contatoLead');
+    if (waBtn) { waBtn.href = waUrl; waBtn.hidden = false; waBtn.addEventListener('click', function () { track('whatsapp', { onde: 'contato' }); }); }
+    if (mailBtn) mailBtn.hidden = true;
+    if (lead) lead.textContent = 'Fale pelo WhatsApp, envie uma mensagem pelo formulário ou por e-mail, com um resumo do assunto. O retorno é feito pelo próprio advogado.';
+    var fabEl = $('fab');
+    if (fabEl) { fabEl.href = waUrl; fabEl.target = '_blank'; fabEl.rel = 'noopener noreferrer'; fabEl.textContent = 'Falar pelo WhatsApp'; }
+  }
+
   /* ---------- Calculadora: salvar dados, enviar cálculo e lembrete no calendário ---------- */
   var KEY = 'tr_calc_v1', last = null;
   try {
