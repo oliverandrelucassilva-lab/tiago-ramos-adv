@@ -27,5 +27,5 @@ Deliberadamente fora, por conflito com o Código de Ética e o Provimento 205/20
 O site inclui o script de Web Analytics da Vercel (sem cookies). Para ativar, habilite "Web Analytics" no painel do projeto na Vercel.
 
 ## Pendências
-- **Domínio:** o código usa `https://tiagoramos.adv.br` (canonical, Open Graph, JSON-LD, sitemap, robots). Ao definir o domínio final, substitua em `index.html`, `sitemap.xml` e `robots.txt`.
+- **Domínio:** o endereço oficial é `https://www.tiagoramos.adv.br` (com www). O domínio sem www redireciona para ele na Vercel. Se mudar, substitua em `index.html`, `privacidade.html`, `sitemap.xml` e `robots.txt` (canonical, Open Graph, JSON-LD, sitemap, robots).
 - **Instagram:** configurado como `tr.juridico` em `assets/config.js` e em `sameAs` no JSON-LD.
